@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PeachWeb-style 3D Header</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #0a0a0f;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  #bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: linear-gradient(180deg, rgba(10,10,15,0.6) 0%, rgba(10,10,15,0) 100%);
+    backdrop-filter: blur(8px);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+  }
+  .logo-mark {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    display: grid; place-items: center;
+    font-weight: 800;
+  }
+  nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  nav a, .nav-item {
+    color: #d4d4d8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: color .2s;
+  }
+  nav a:hover, .nav-item:hover { color: #fff; }
+  .chev { width: 10px; height: 10px; opacity: .7; }
+  .actions { display: flex; gap: 12px; align-items: center; }
+  .btn {
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .2s;
+  }
+  .btn.ghost { background: transparent; color: #d4d4d8; border-color: #27272a; }
+  .btn.ghost:hover { color: #fff; border-color: #52525b; }
+  .btn.primary { background: #fff; color: #0a0a0f; }
+  .btn.primary:hover { background: #e4e4e7; }
+  .btn.outline { background: transparent; color: #fff; border-color: #fff; }
+  .hero {
+    position: relative;
+    z-index: 5;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 7vw, 96px);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+    background: linear-gradient(180deg, #fff 30%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p {
+    margin-top: 20px;
+    color: #a1a1aa;
+    font-size: 18px;
+    max-width: 620px;
+  }
+  .hero .cta { margin-top: 36px; display: flex; gap: 14px; }
+  /* dropdown */
+  .dropdown { position: relative; }
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 12px;
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 12px;
+    padding: 8px;
+    min-width: 200px;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.5);
+  }
+  .dropdown:hover .dropdown-menu { display: flex; }
+  .dropdown-menu a {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #d4d4d8;
+  }
+  .dropdown-menu a:hover { background: #27272a; color: #fff; }
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">P</div>
+    <span>PeachWeb</span>
+  </div>
+  <nav>
+    <div class="dropdown">
+      <span class="nav-item">Product <svg class="chev" viewBox="0 0 10 10"><path d="M2 3.5 L5 6.5 L8 3.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span>
+      <div class="dropdown-menu">
+        <a href="#">Features</a>
+        <a href="#">About the builder</a>
+        <a href="#">Become an Expert</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <span class="nav-item">Use Cases <svg class="chev" viewBox="0 0 10 10"><path d="M2 3.5 L5 6.5 L8 3.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span>
+      <div class="dropdown-menu">
+        <a href="#">Ecommerce</a>
+        <a href="#">Storytelling</a>
+        <a href="#">Creative & Tech</a>
+        <a href="#">Portfolio</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <span class="nav-item">Resources <svg class="chev" viewBox="0 0 10 10"><path d="M2 3.5 L5 6.5 L8 3.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span>
+      <div class="dropdown-menu">
+        <a href="#">Marketplace</a>
+        <a href="#">Tutorials</a>
+        <a href="#">Blog</a>
+        <a href="#">Discord</a>
+      </div>
+    </div>
+    <a href="#">Pricing</a>
+  </nav>
+  <div class="actions">
+    <button class="btn ghost">Login</button>
+    <button class="btn outline">Book a Call</button>
+    <button class="btn primary">Get Started</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>3D Websites in Minutes</h1>
+  <p>No-Code Builder for WebGL 3D Websites. Powering award winners & nominees.</p>
+  <div class="cta">
+    <button class="btn primary">Get Started</button>
+    <button class="btn outline">Book a Call</button>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  const canvas = document.getElementById('bg');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+  camera.position.z = 6;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Jellyfish-like floating spheres with glow
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const colors = [0x8b5cf6, 0xec4899, 0x06b6d4, 0xf59e0b];
+  for (let i = 0; i < 18; i++) {
+    const geo = new THREE.SphereGeometry(Math.random()*0.15 + 0.05, 16, 16);
+    const mat = new THREE.MeshBasicMaterial({ color: colors[i % colors.length], transparent: true, opacity: 0.85 });
+    const m = new THREE.Mesh(geo, mat);
+    m.position.set((Math.random()-0.5)*12, (Math.random()-0.5)*8, (Math.random()-0.5)*6);
+    m.userData = { speed: Math.random()*0.02 + 0.005, phase: Math.random()*Math.PI*2, baseY: m.position.y };
+    group.add(m);
+  }
+
+  // connecting lines
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.15 });
+  const pts = [];
+  for (let i = 0; i < 40; i++) pts.push(new THREE.Vector3((Math.random()-0.5)*14, (Math.random()-0.5)*10, (Math.random()-0.5)*6));
+  const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+  const lines = new THREE.LineSegments(lineGeo, lineMat);
+  scene.add(lines);
+
+  // ambient glow via point light not needed for basic material
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.01;
+    group.children.forEach(m => {
+      m.position.y = m.userData.baseY + Math.sin(t*2 + m.userData.phase)*0.6;
+      m.rotation.y += m.userData.speed;
+      m.position.x += Math.sin(t + m.userData.phase)*0.002;
+    });
+    group.rotation.y = Math.sin(t*0.3)*0.15;
+    lines.rotation.y = t*0.05;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // mouse parallax
+  window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 0.6;
+    const y = (e.clientY / window.innerHeight - 0.5) * 0.4;
+    camera.position.x += (x - camera.position.x)*0.05;
+    camera.position.y += (-y - camera.position.y)*0.05;
+    camera.lookAt(0,0,0);
+  });
+</script>
+</body>
+</html>
